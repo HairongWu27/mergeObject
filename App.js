@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
+import './App.css';
+import ItemList from './ItemList.js';
 
-//import ProductTable from './components/ProductTable/'
-//import SearchBar from './components/SearchBar/'
-import AddTodo from './components/AddTodo/'
 
 class App extends Component {
   render() {
     return (
-      <div>
-        
-        <AddTodo/>
-      </div>
+          <ItemList />
     );
   }
 }
 
-export default App;
+export default App
 
-
-//<SearchBar />
-//<ProductTable />
