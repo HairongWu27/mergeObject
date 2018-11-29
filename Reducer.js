@@ -1,7 +1,9 @@
 // create actions and reducers
 
 // initial state
-const initialState = {
+const initialState = []
+/*
+{
     
     filterText: '',
     inStockOnly: false,
@@ -14,11 +16,11 @@ const initialState = {
       {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
     ],
     todos: [],
-  };
+  };*/
 
   // actions
-  export let setFilter = {type: 'SETFILTER', filterText: 'test'};
-  export let setInStock = {type: 'SETINSTOCK', inStockOnly: true};
+  //export let setFilter = {type: 'SETFILTER', filterText: 'test'};
+  //export let setInStock = {type: 'SETINSTOCK', inStockOnly: true};
   
   let nextTodoId = 0;
   export const addTodo = text => ({
@@ -28,14 +30,15 @@ const initialState = {
   });
 
   // reducer
-  export const producttableR = (state = initialState, action) => {
+  //export const producttableR = (state = initialState, action) => {
+    export const todos = (state = initialState, action) => {
       console.log(state);
       console.log(action);
       switch (action.type) {
-          case 'SETFILTER':
-            return {...state, filterText: action.filterText};
-          case 'SETINSTOCK':
-            return {...state, inStockOnly: action.inStockOnly};
+          //case 'SETFILTER':
+          //  return {...state, filterText: action.filterText};
+          //case 'SETINSTOCK':
+          //  return {...state, inStockOnly: action.inStockOnly};
           case 'ADD_TODO':
             return [ 
                    ...state,  

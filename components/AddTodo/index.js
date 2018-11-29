@@ -11,15 +11,17 @@ class AddTodo extends Component {
   
   constructor(props) {
     super(props);
-    this.state = {input: ''};
+    this.state = {inputa: '', all:[]};
   }
   handleInput = e => {
-    if(e.target.value !=='/n'){
+    if(e.keyCode !=='/n'){
       console.log('regular input');
-      this.setState({input: e.target.value});
-      this.props.addtodoA(this.state.input);
+      this.setState({inputa: e.target.value});
+      this.props.addtodoA(e.target.value);
     }else{
       console.log('enter char');
+      //var tmp =this.state.all; tmp.push(this.state.input);
+      //this.setState({input:'', all:tmp});
       //this.props.addtodoA(this.state.input);
       //this.setState({input: ''});
     }
@@ -33,14 +35,17 @@ class AddTodo extends Component {
  
   
   render() {
+    console.log(this.props.todos);
     return (
       <form>
         <input type="text"
                placeholder="Search..."
-               value={this.state.input} 
+               value={this.state.inputa} 
                onChange={this.handleInput}
          />
-       <p>{this.state.input}</p>
+        
+       <p>{this.state.inputa}</p>
+       <p>{''}</p>
       </form>
     );
   }
@@ -58,7 +63,7 @@ class AddTodo extends Component {
     return({
       //setFilterA: (text)=>{setFilter.filterText = text; dispatch(setFilter)},
       //setInStockA: (checker)=>{setInStock.inStockOnly = checker; dispatch(setInStock)},
-      addtodoA: (text)=>{addTodo.todos = text; dispatch(addTodo)},
+      addtodoA: (text)=>{addTodo.todos = text; dispatch(addTodo(text))},
       //addtodo: (text)=>dispatch(actions.addTodo(text)), 
     })
   };
