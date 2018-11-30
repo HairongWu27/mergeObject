@@ -56,13 +56,7 @@ function requestComplete(newitems) {
 //export let chosenItem ={type:'SELECT_ITEM', itemChosen: ''};
 export let setSearch ={type:'SEARCH_ITEM', itemSearch: ''};
 export let didSearch ={type:'DID_SEARCH', didSearch: ''};
-/*
-function choseItem(selectId){
-    return{
-        type:'SELECT_ITEM',
-        itemChosen:selectId,
-    }
-}*/
+
 
 const myReducer = (state = InitState, action) => {
     console.log('Action received: ');

@@ -11,9 +11,7 @@ class ItemList extends Component {
  
     
     handleClick= (e)=>{
-        //console.log(e.target +' ??????');
-        //console.log(e.target.id +' >>>>>');
-        //console.log(e.target.itemID +' >>>>>');
+        
         this.props.setItem(e.target.id);
     }
 
@@ -32,7 +30,7 @@ class ItemList extends Component {
             return <p>Loading…</p>;
         }
         var didSearch = this.props.didSearch;
-        //if(this.props.didSearch){ return (<div><InputForm/></div>);}
+       
         return (
            
             <div>
@@ -71,7 +69,7 @@ class ItemList extends Component {
     }
 }
 
-//export default ItemList;
+
 
 const mapStateToProps = state => {
     return {
@@ -79,27 +77,18 @@ const mapStateToProps = state => {
         hasErrored: state.hasErrored,
         isLoading: state.isLoading,
         didSearch: state.didSearch,
-        //itemChosen: state.itemChosen, //show select item
-        //itemSearch: state.itemSearch,  //search from item list
+       
     }
   };
   
   const mapDispatchToProps = dispatch => {
       return({
           loaddata: (url) => {dispatch(fetchdata(url));},
-          //setItem:(itemID) =>{chosenItem.itemChosen = itemID; dispatch(chosenItem)},
-          //setSearchItem:(name) =>{setSearch.itemSearch = name; dispatch(setSearch)},
+
       })
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
 
 
-  /*
-
-
-
-    
-
-
-  */
+ 
