@@ -12,9 +12,9 @@ const InitState = {
     ],
     hasErrored: false,
     isLoading: false,
-    itemChosen: '',
+    //itemChosen: '',
     itemSearch:'',
-    users:[],
+    didSearch:false,
 }
 
 // action creators
@@ -53,8 +53,9 @@ function requestComplete(newitems) {
     };
 }
 
-export let chosenItem ={type:'SELECT_ITEM', itemChosen: ''};
+//export let chosenItem ={type:'SELECT_ITEM', itemChosen: ''};
 export let setSearch ={type:'SEARCH_ITEM', itemSearch: ''};
+export let didSearch ={type:'DID_SEARCH', didSearch: ''};
 /*
 function choseItem(selectId){
     return{
@@ -77,6 +78,8 @@ const myReducer = (state = InitState, action) => {
           return{...state, itemChosen:action.itemChosen};
         case 'SEARCH_ITEM':
           return{...state, itemSearch:action.itemSearch};
+        case 'DID_SEARCH':
+          return{...state, didSearch: action.didSearch};
         default:
           return state;
       }
