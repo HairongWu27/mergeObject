@@ -1,94 +1,64 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {fetchdata, chosenItem,setSearch} from './store.js';
-import InputForm from './inputform';
-
-
 
 class ItemList extends Component {
-
-   
- 
-    
-    handleClick= (e)=>{
-        
-        this.props.setItem(e.target.id);
-    }
+	// initially defined in component
+	// will be copied to Redux store
+    /*
+    newItems = [
+        {id: 1, label: 'List item 10'},
+        {id: 2, label: 'List item 20'},
+        {id: 3, label: 'List item 30'},
+        {id: 4, label: 'List item 40'}
+      ];*/
+     newItems ={'person':[{id:10,firstName:'John',lastName:'Doe'},
+                           { id:5,firstName: 'Jack',lastName:'Doe' },
+                           {id:7,firstName:"James",lastName:"Doe" }]};
 
     componentDidMount() {
-        this.props.loaddata('http://api.github.com/users');
+        this.props.loaddata(this.newItems.person);
     }
 
     render() {
-        var itemID= this.props.itemChosen;
-        console.log(this.props.didSearch+'  VVVVV');
         if (this.props.hasErrored) {
             return <p>Sorry! There was an error loading the items</p>;
         }
 
         if (this.props.isLoading) {
+			console.log('show - loading');
             return <p>Loading…</p>;
         }
-        var didSearch = this.props.didSearch;
-       
+
         return (
-           
-            <div>
-              
-              <InputForm/>
-                <ul>
-                     {this.props.items.map((item) => 
-                     ( (item.name? 
-                        (
-                           <div>
-                                { this.props.items.map((x,idx)=>{
-                                     return (<li key={idx}>
-                                             <p>name: {x.name}</p>
-                                             <p>commit url: {x.commits_url}</p>
-                                             <p>contents url: {x.contents_url}</p>
-                                             <p>Create at: {x.created_at}</p>
-                                             <p>description: {x.description}</p>
-                                             <p>full name: {x.full_name}</p>
-                                        </li>
-                                  )})}
-                           </div> 
-                        ):
-                        (<div>
-                            <img src={item.avatar_url} value={item.id} id={item.id}
-                            alt={item.avatar_url}  style={{'width':100, 'height':100}} id={item.id}></img> 
-                            <p></p>
-                            {item.login}
-                        </div> )
-                        
-                        
-                     )
-                    ))}   
-                </ul>
-            </div>
+            <ul>
+                {this.props.items.map((item) => (
+                    <li key={item.id}>
+                        {item.firstName} {' '}{item.lastName}
+                    </li>
+                ))}
+            </ul>
         );
     }
 }
 
-
+//export default ItemList;
 
 const mapStateToProps = state => {
     return {
         items: state.items,
         hasErrored: state.hasErrored,
-        isLoading: state.isLoading,
-        didSearch: state.didSearch,
-       
+        isLoading: state.isLoading
     }
   };
   
   const mapDispatchToProps = dispatch => {
       return({
-          loaddata: (url) => {dispatch(fetchdata(url));},
-
+          loaddata: (items) => {
+            dispatch({type: 'ITEMS_IS_LOADING', bool: true});
+            dispatch({type: 'ITEMS_COMPLETE', items: items});
+            dispatch({type: 'ITEMS_IS_LOADING', bool: false});
+          }
       })
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
-
-
- 
