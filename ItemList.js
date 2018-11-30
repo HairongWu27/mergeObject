@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {fetchdata, chosenItem} from './store.js';
-
+import {fetchdata, chosenItem,setSearch} from './store.js';
+import InputForm from './inputform';
 
 
 
 class ItemList extends Component {
+
+   
+ 
     
     handleClick= (e)=>{
         //console.log(e.target +' ??????');
@@ -27,20 +30,17 @@ class ItemList extends Component {
         if (this.props.isLoading) {
             return <p>Loading…</p>;
         }
-        if(itemID !==''){
-            return(
-            <div>
-                
-            </div>);
-        }
+        
 
         return (
-             
-            <ul>
+            <div>
+                <InputForm/>
+              <ul>
                 {this.props.items.map((item) => (
                     <div>
-                        <button id={item.id} value={item.id} onClick={this.handleClick}><img src={item.avatar_url} 
-                        alt={item.avatar_url}  style={{'width':100, 'height':100}} id={item.id}></img> </button>
+                        
+                        <img src={item.avatar_url} value={item.id} id={item.id}
+                        alt={item.avatar_url}  style={{'width':100, 'height':100}} id={item.id}></img> 
                         <p></p>
                         {item.login}
                          
@@ -51,7 +51,8 @@ class ItemList extends Component {
                     </div>
                     
                 ))}
-            </ul>
+              </ul>
+            </div>
         );
     }
 }
@@ -63,16 +64,27 @@ const mapStateToProps = state => {
         items: state.items,
         hasErrored: state.hasErrored,
         isLoading: state.isLoading,
-        itemChosen: state.itemChosen,
+        //itemChosen: state.itemChosen, //show select item
+        //itemSearch: state.itemSearch,  //search from item list
     }
   };
   
   const mapDispatchToProps = dispatch => {
       return({
           loaddata: (url) => {dispatch(fetchdata(url));},
-          setItem:(itemID) =>{chosenItem.itemChosen=itemID; dispatch(chosenItem)},
-
+          //setItem:(itemID) =>{chosenItem.itemChosen = itemID; dispatch(chosenItem)},
+          //setSearchItem:(name) =>{setSearch.itemSearch = name; dispatch(setSearch)},
       })
   }
   
   export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
+
+
+  /*
+
+
+
+    
+
+
+  */

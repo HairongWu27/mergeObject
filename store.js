@@ -14,6 +14,7 @@ const InitState = {
     isLoading: false,
     itemChosen: '',
     itemSearch:'',
+    users:[],
 }
 
 // action creators
@@ -53,6 +54,7 @@ function requestComplete(newitems) {
 }
 
 export let chosenItem ={type:'SELECT_ITEM', itemChosen: ''};
+export let setSearch ={type:'SEARCH_ITEM', itemSearch: ''};
 /*
 function choseItem(selectId){
     return{
@@ -73,6 +75,8 @@ const myReducer = (state = InitState, action) => {
           return {hasErrored: false, isLoading: false, items: action.items};
         case 'SELECT_ITEM':
           return{...state, itemChosen:action.itemChosen};
+        case 'SEARCH_ITEM':
+          return{...state, itemSearch:action.itemSearch};
         default:
           return state;
       }
